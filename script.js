@@ -88,12 +88,23 @@ function showallcards(arr){
 showallcards(Users);
 
 let inp = document.querySelector("input")
+let notexists = document.querySelector("#ifnotexists")
+
+console.dir(notexists)
+
 
 inp.addEventListener("input",function(){
     let new_user = Users.filter((user) => {
         return user.name.startsWith(inp.value)
     })
-
-    document.querySelector("#cards").innerHTML = '';
-    showallcards(new_user)
+    if (new_user.length > 0){
+        document.querySelector("#cards").innerHTML = '';
+        document.querySelector("#ifnotexists").style.display = "none";
+        showallcards(new_user);    
+    }
+    else{
+        document.querySelector("#cards").innerHTML = ''; // clear old cards
+        document.querySelector("#ifnotexists").style.display = "block";
+        document.querySelector("#ifnotexists").textContent = "No User Found...";
+    }
 })
